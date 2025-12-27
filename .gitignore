@@ -1,0 +1,6 @@
+# there shouldn't be any node_modules in the root directory here... if there are, you've probably done something wrong
+# im still adding this just in case tho lol:
+node_modules
+
+# this is for jetbrains IDEs as they leave a little config folder behind lol, i use webstorm
+.idea
