@@ -5,6 +5,7 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 const navbarItems: { href: string; label: string; key: number }[] = [
   {
@@ -23,7 +24,7 @@ function Navbar() {
   const currentPath = usePathname();
 
   return (
-    <Card className="w-[50%] flex flex-row items-center justify-center">
+    <Card className="w-[50%] flex flex-row items-center justify-center relative">
       {navbarItems.map((item) => (
         <Link
           className={`text-lg ${currentPath == item.href ? "font-bold" : "text-muted-foreground"}`}
@@ -33,6 +34,9 @@ function Navbar() {
           {item.label}
         </Link>
       ))}
+      <div className="absolute right-4">
+        <ThemeToggle />
+      </div>
     </Card>
   );
 }

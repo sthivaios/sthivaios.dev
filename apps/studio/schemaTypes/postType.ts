@@ -65,9 +65,13 @@ export default {
                 title: 'Link',
                 fields: [
                   {
+                    title: 'URL',
                     name: 'href',
                     type: 'url',
-                    title: 'URL',
+                    validation: (rule: Rule) =>
+                      rule.uri({
+                        scheme: ['http', 'https', 'mailto'],
+                      }),
                   },
                 ],
               },

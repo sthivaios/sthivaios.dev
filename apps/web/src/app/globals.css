@@ -125,3 +125,11 @@
     @apply bg-background text-foreground;
   }
 }
+
+.prose_pro_max {
+  @apply dark:prose-invert prose-p:mb-2 prose-h1:mt-10 prose-a:underline prose-headings:font-bold;
+}
+
+.hyperlink {
+  @apply text-primary hover:text-primary-foreground transition duration-200 ease-in-out;
+}

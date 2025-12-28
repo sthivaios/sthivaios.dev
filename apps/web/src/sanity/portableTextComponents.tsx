@@ -2,6 +2,7 @@ import Image from "next/image";
 import { PortableTextComponents } from "next-sanity";
 import { sanityImageUrl } from "@/sanity/image";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
+import Link from "next/link";
 
 export const components: PortableTextComponents = {
   types: {
@@ -26,5 +27,16 @@ export const components: PortableTextComponents = {
           </div>
         </div>
       ) : null,
+  },
+  marks: {
+    link: ({ value, children }) => {
+      const target = value?.href?.startsWith("http") ? "_blank" : undefined;
+
+      return (
+        <Link href={value?.href} target={target} className="hyperlink">
+          {children}
+        </Link>
+      );
+    },
   },
 };

@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge";
 const POSTS_QUERY = defineQuery(`*[
   _type == "post"
   && defined(slug.current)
+  && slug.current != "about-me"
 ]|order(date asc){_id, title, slug, publishedAt}`);
 
 export default async function IndexPage() {
@@ -16,6 +17,7 @@ export default async function IndexPage() {
     <main className="flex flex-col w-full items-center justify-center gap-10">
       <h1 className="text-4xl font-bold">Posts</h1>
       <ul className="flex flex-col w-[40%] items-center justify-center gap-10">
+        {posts.length == 0 ? "Woah... looks like there are no posts yet" : null}
         {posts.map((post) => (
           <li className="w-full" key={post._id}>
             <Card className="p-5 w-full flex flex-col gap-2">

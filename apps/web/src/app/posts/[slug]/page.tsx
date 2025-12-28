@@ -40,12 +40,14 @@ export default async function EventPage({
               ratio={16 / 9}
               className="bg-muted rounded-lg w-full max-w-2xl"
             >
-              <Image
-                src={imageUrl}
-                alt={title || "Post"}
-                className="object-contain rounded-lg"
-                fill
-              />
+              {imageUrl ? (
+                <Image
+                  src={imageUrl}
+                  alt={title || "Post"}
+                  className="object-contain rounded-lg"
+                  fill
+                />
+              ) : null}
             </AspectRatio>
           </div>
           <div className="flex flex-col items-start justify-center text-wrap wrap-normal max-w-[40%] gap-2">

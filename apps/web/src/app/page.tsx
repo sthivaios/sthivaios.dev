@@ -1,16 +1,29 @@
 import React from "react";
-import Link from "next/link";
+import { defineQuery, PortableText } from "next-sanity";
+import { sanityFetch } from "@/sanity/live";
+import { notFound } from "next/navigation";
+import { components } from "@/sanity/portableTextComponents";
 
-function Page() {
+async function Page() {
+  const POST_QUERY = defineQuery(`*[
+    _type == "post" &&
+    slug.current == "about-me"
+  ][0]`);
+
+  const { data: post } = await sanityFetch({
+    query: POST_QUERY,
+  });
+  if (!post) {
+    notFound();
+  }
+
+  const { title, publishedAt, mainImage, body } = post;
+
   return (
     <div className="p-10 flex flex-col gap-2 items-center justify-center">
-      Links:
-      <Link
-        href="/posts"
-        className="font-bold underline hover:text-blue-500 transition duration-200"
-      >
-        Posts
-      </Link>
+      <div className="flex flex-col justify-center w-[75%] prose-lg prose_pro_max">
+        {body ? <PortableText value={body} components={components} /> : null}
+      </div>
     </div>
   );
 }

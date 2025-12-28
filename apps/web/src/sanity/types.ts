@@ -206,9 +206,9 @@ export type AllSanitySchemaTypes =
 
 export declare const internalGroqTypeReferenceTo: unique symbol;
 
-// Source: ../web/src/app/posts/[slug]/page.tsx
+// Source: ../web/src/app/page.tsx
 // Variable: POST_QUERY
-// Query: *[    _type == "post" &&    slug.current == $slug][0]
+// Query: *[    _type == "post" &&    slug.current == "about-me"  ][0]
 export type POST_QUERY_RESULT = {
   _id: string;
   _type: "post";
@@ -262,7 +262,7 @@ export type POST_QUERY_RESULT = {
 
 // Source: ../web/src/app/posts/page.tsx
 // Variable: POSTS_QUERY
-// Query: *[  _type == "post"  && defined(slug.current)]|order(date asc){_id, title, slug, publishedAt}
+// Query: *[  _type == "post"  && defined(slug.current)  && slug.current != "about-me"]|order(date asc){_id, title, slug, publishedAt}
 export type POSTS_QUERY_RESULT = Array<{
   _id: string;
   title: string | null;
@@ -274,7 +274,7 @@ export type POSTS_QUERY_RESULT = Array<{
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    '*[\n    _type == "post" &&\n    slug.current == $slug\n][0]': POST_QUERY_RESULT;
-    '*[\n  _type == "post"\n  && defined(slug.current)\n]|order(date asc){_id, title, slug, publishedAt}': POSTS_QUERY_RESULT;
+    '*[\n    _type == "post" &&\n    slug.current == "about-me"\n  ][0]': POST_QUERY_RESULT;
+    '*[\n  _type == "post"\n  && defined(slug.current)\n  && slug.current != "about-me"\n]|order(date asc){_id, title, slug, publishedAt}': POSTS_QUERY_RESULT;
   }
 }
