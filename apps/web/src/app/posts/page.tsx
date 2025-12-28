@@ -42,7 +42,7 @@ export default async function IndexPage() {
                   </AspectRatio>
                 </div>
 
-                <h2 className="text-xl text-center font-semibold text-wrap line-clamp-3 w-full">
+                <h2 className="text-xl text-center font-semibold text-wrap line-clamp-2 w-full">
                   {post?.title}
                 </h2>
 
