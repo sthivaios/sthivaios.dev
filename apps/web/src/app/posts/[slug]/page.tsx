@@ -6,6 +6,7 @@ import { sanityImageUrl } from "@/sanity/image";
 
 import { sanityFetch } from "@/sanity/live";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
+import SharePostButton from "@/components/share-post-button";
 
 const POST_QUERY = defineQuery(`*[
     _type == "post" &&
@@ -26,8 +27,6 @@ export default async function EventPage({
   }
 
   const { title, slug, publishedAt, mainImage, body } = post;
-
-  const postDate = new Date(publishedAt).toDateString();
 
   const imageUrl = mainImage ? sanityImageUrl(mainImage).quality(80).url() : "";
 
@@ -56,11 +55,21 @@ export default async function EventPage({
               ← Back to posts
             </Link>
             <h1 className="font-bold text-3xl mb-6 ">{title}</h1>
-            <p>{new Date(publishedAt).toDateString()}</p>
+            {publishedAt ? (
+              <p>
+                Published on:{" "}
+                <span className="font-bold">
+                  {new Date(publishedAt).toISOString().slice(0, 10)}
+                </span>
+              </p>
+            ) : null}
+            {slug?.current ? (
+              <SharePostButton slug={slug.current} pointerCursor />
+            ) : null}
           </div>
         </div>
-        <div className="flex flex-col gap-2 w-[75%] text-justify mb-30">
-          <PortableText value={body}></PortableText>
+        <div className="flex flex-col justify-center w-[75%] prose-lg dark:prose-invert prose-p:mb-2 prose-h1:mt-10 prose-a:underline">
+          {body ? <PortableText value={body} /> : null}
         </div>
       </div>
     </main>
