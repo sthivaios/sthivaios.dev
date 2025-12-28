@@ -24,7 +24,7 @@ function Navbar() {
   const currentPath = usePathname();
 
   return (
-    <Card className="w-[50%] flex flex-row items-center justify-center relative">
+    <Card className="w-[75%] lg:w-[50%] flex flex-row items-center justify-center relative">
       {navbarItems.map((item) => (
         <Link
           className={`text-lg ${currentPath == item.href ? "font-bold" : "text-muted-foreground"}`}

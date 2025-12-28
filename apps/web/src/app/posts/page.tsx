@@ -14,9 +14,9 @@ export default async function IndexPage() {
   const { data: posts } = await sanityFetch({ query: POSTS_QUERY });
 
   return (
-    <main className="flex flex-col w-full items-center justify-center gap-10">
+    <main className="flex flex-col w-full items-center justify-center gap-10 mt-5">
       <h1 className="text-4xl font-bold">Posts</h1>
-      <ul className="flex flex-col w-[40%] items-center justify-center gap-10">
+      <ul className="flex flex-col w-[80%] md:w-[40%] lg:w-[40%] items-center justify-center gap-10">
         {posts.length == 0 ? "Woah... looks like there are no posts yet" : null}
         {posts.map((post) => (
           <li className="w-full" key={post._id}>

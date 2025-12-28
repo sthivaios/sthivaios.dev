@@ -34,25 +34,25 @@ export default async function EventPage({
   return (
     <main className="flex flex-col items-center w-full">
       <div className="flex flex-col items-center justify-center gap-2 w-full">
-        <div className="flex flex-row w-full justify-center items-center gap-20 mb-20">
-          <div className="w-full max-w-2xl">
-            <AspectRatio
-              ratio={16 / 9}
-              className="bg-muted rounded-lg w-full max-w-2xl"
-            >
-              {imageUrl ? (
+        <div className="flex flex-col sm:flex-col md:flex-row lg:flex-row w-full justify-center items-center gap-20 mb-20 p-5">
+          {imageUrl ? (
+            <div className="w-full max-w-2xl">
+              <AspectRatio
+                ratio={16 / 9}
+                className="bg-muted rounded-lg w-full max-w-2xl"
+              >
                 <Image
                   src={imageUrl}
                   alt={title || "Post"}
                   className="object-contain rounded-lg"
                   fill
                 />
-              ) : null}
-            </AspectRatio>
-          </div>
-          <div className="flex flex-col items-start justify-center text-wrap wrap-normal max-w-[40%] gap-2">
+              </AspectRatio>
+            </div>
+          ) : null}
+          <div className="flex flex-col items-center sm:items-center md:items-start lg:items-start text-center sm:text-center md:text-start lg:text-start justify-center text-wrap wrap-normal max-w-[100%] sm:max-w-[100%] md:max-w-[40%] lg:max-w-[40%] gap-2">
             <Link
-              href="/"
+              href="/posts"
               className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white mb-4"
             >
               ← Back to posts

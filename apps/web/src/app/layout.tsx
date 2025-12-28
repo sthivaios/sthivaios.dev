@@ -50,7 +50,7 @@ export default function RootLayout({
           <div className="flex flex-row w-full p-5 items-center justify-center mt-10">
             <Navbar />
           </div>
-          <div className="p-10">{children}</div>
+          <div className="p-0">{children}</div>
           <div className="p-10 flex flex-row items-center justify-center w-full">
             <p className="text-muted">Stratos Thivaios © 2025</p>
           </div>
