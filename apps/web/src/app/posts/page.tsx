@@ -18,24 +18,22 @@ export default async function IndexPage() {
       <ul className="flex flex-col w-[40%] items-center justify-center gap-10">
         {posts.map((post) => (
           <li className="w-full" key={post._id}>
-            <Card className="p-5 w-full">
+            <Card className="p-5 w-full flex flex-col gap-2">
               <Link
                 className="hover:underline block"
                 href={`/posts/${post?.slug?.current}`}
               >
-                <div className="flex flex-col gap-2">
-                  <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
-                    {post?.title}
-                  </h2>
-                  {post?.publishedAt && (
-                    <div className="flex flex-row w-full">
-                      <Badge className="">
-                        {new Date(post.publishedAt).toLocaleDateString()}
-                      </Badge>
-                    </div>
-                  )}
-                </div>
+                <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
+                  {post?.title}
+                </h2>
               </Link>
+              {post?.publishedAt && (
+                <div className="flex flex-row w-full">
+                  <Badge className="">
+                    {new Date(post.publishedAt).toISOString().slice(0, 10)}
+                  </Badge>
+                </div>
+              )}
             </Card>
           </li>
         ))}
