@@ -7,6 +7,7 @@ import { sanityImageUrl } from "@/sanity/image";
 import { sanityFetch } from "@/sanity/live";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import SharePostButton from "@/components/share-post-button";
+import { components } from "@/sanity/portableTextComponents";
 
 const POST_QUERY = defineQuery(`*[
     _type == "post" &&
@@ -68,8 +69,8 @@ export default async function EventPage({
             ) : null}
           </div>
         </div>
-        <div className="flex flex-col justify-center w-[75%] prose-lg dark:prose-invert prose-p:mb-2 prose-h1:mt-10 prose-a:underline">
-          {body ? <PortableText value={body} /> : null}
+        <div className="flex flex-col justify-center w-[75%] prose-lg dark:prose-invert prose-p:mb-2 prose-h1:mt-10 prose-a:underline prose-">
+          {body ? <PortableText value={body} components={components} /> : null}
         </div>
       </div>
     </main>
