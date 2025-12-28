@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Noto_Sans } from "next/font/google";
 import "./globals.css";
-import {SanityLive} from "@/sanity/live";
+import { SanityLive } from "@/sanity/live";
 
-const notoSans = Noto_Sans({variable:'--font-sans'});
+const notoSans = Noto_Sans({ variable: "--font-sans" });
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
