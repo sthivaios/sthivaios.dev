@@ -1,3 +1,5 @@
+import {Rule} from 'sanity'
+
 export default {
   name: 'post',
   title: 'Blog Post',
@@ -16,7 +18,7 @@ export default {
         source: 'title',
         maxLength: 96,
       },
-      validation: (rule) => rule.required().error("Posts are required to have a slug")
+      validation: (rule: Rule) => rule.required().error('Posts are required to have a slug'),
     },
     {
       name: 'mainImage',
@@ -73,8 +75,27 @@ export default {
           },
         },
         {
-          type: 'image',
-          options: {hotspot: true},
+          name: 'inlineImage',
+          title: 'Inline Image',
+          type: 'object',
+          fields: [
+            {
+              name: 'image',
+              type: 'image',
+              options: {hotspot: true},
+              validation: (rule: Rule) => rule.required(),
+            },
+            {
+              name: 'caption',
+              type: 'string',
+            },
+            {
+              name: 'alt',
+              type: 'string',
+              title: 'Alt text',
+              validation: (rule: Rule) => rule.required(),
+            },
+          ],
         },
       ],
     },
