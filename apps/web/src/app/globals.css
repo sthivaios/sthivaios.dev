@@ -126,6 +126,14 @@
   }
 }
 
+/* make text selection pretty */
+::selection {
+  @apply bg-black text-white;
+}
+.dark ::selection {
+  @apply bg-white text-black;
+}
+
 .prose_pro_max {
   @apply dark:prose-invert prose-p:mb-2 prose-h1:mt-10 prose-a:underline prose-headings:font-bold;
 }
