@@ -22,8 +22,6 @@ export default async function EventPage({
     notFound();
   }
 
-  console.log(post);
-
   const { title, slug, publishedAt, mainImage, body } = post;
 
   const postDate = new Date(publishedAt).toDateString();

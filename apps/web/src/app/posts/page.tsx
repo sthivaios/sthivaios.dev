@@ -10,8 +10,6 @@ const POSTS_QUERY = defineQuery(`*[
 export default async function IndexPage() {
   const { data: posts } = await sanityFetch({ query: POSTS_QUERY });
 
-  console.log(posts);
-
   return (
     <main className="flex min-h-screen flex-col p-24 gap-12">
       <h1 className="text-4xl font-bold tracking-tighter text-gray-900 dark:text-white">
