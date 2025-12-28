@@ -32,9 +32,9 @@ export default async function EventPage({
   const imageUrl = mainImage ? sanityImageUrl(mainImage).quality(80).url() : "";
 
   return (
-    <main className="flex flex-col items-center w-full p-10">
+    <main className="flex flex-col items-center w-full">
       <div className="flex flex-col items-center justify-center gap-2 w-full">
-        <div className="flex flex-row w-full justify-center items-center gap-20 mt-10 mb-20">
+        <div className="flex flex-row w-full justify-center items-center gap-20 mb-20">
           <div className="w-full max-w-2xl">
             <AspectRatio
               ratio={16 / 9}
