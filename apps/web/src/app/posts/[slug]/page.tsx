@@ -39,7 +39,7 @@ export default async function EventPage({
             <div className="w-full max-w-2xl">
               <AspectRatio
                 ratio={16 / 9}
-                className="bg-muted rounded-lg w-full max-w-2xl"
+                className="rounded-lg w-full max-w-2xl"
               >
                 <Image
                   src={imageUrl}
@@ -50,7 +50,12 @@ export default async function EventPage({
               </AspectRatio>
             </div>
           ) : null}
-          <div className="flex flex-col items-center sm:items-center md:items-start lg:items-start text-center sm:text-center md:text-start lg:text-start justify-center text-wrap wrap-normal max-w-[100%] sm:max-w-[100%] md:max-w-[40%] lg:max-w-[40%] gap-2">
+          <div
+            className={
+              `flex flex-col items-center sm:items-center ${imageUrl ? "md:items-start lg:items-start" : ""} text-center sm:text-center md:text-start lg:text-start justify-center` +
+              "text-wrap wrap-normal max-w-[100%] sm:max-w-[100%] md:max-w-[40%] lg:max-w-[40%] gap-2"
+            }
+          >
             <Link
               href="/posts"
               className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white mb-4"
