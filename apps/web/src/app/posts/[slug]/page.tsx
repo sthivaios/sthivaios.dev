@@ -1,8 +1,11 @@
 import { defineQuery, PortableText } from "next-sanity";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import Image from "next/image";
+import { sanityImageUrl } from "@/sanity/image";
 
 import { sanityFetch } from "@/sanity/live";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
 
 const POST_QUERY = defineQuery(`*[
     _type == "post" &&
@@ -26,7 +29,7 @@ export default async function EventPage({
 
   const postDate = new Date(publishedAt).toDateString();
 
-  const imageUrl = "https://placehold.co/550x310/png";
+  const imageUrl = mainImage ? sanityImageUrl(mainImage).quality(80).url() : "";
 
   return (
     <main className="flex flex-col items-center w-full p-10">
@@ -39,16 +42,28 @@ export default async function EventPage({
         </Link>
       </div>
       <div className="flex flex-col items-center justify-center gap-2 w-full">
-        <h1 className="font-bold text-3xl mb-6">{title}</h1>
-        <img
-          src={imageUrl}
-          alt={title || "Event"}
-          className="border-3 border-black"
-          height="310"
-          width="550"
-        />
-        <div className="border-1 w-[75%] my-5 border-gray-800"></div>
-        <PortableText value={body}></PortableText>
+        <div className="flex flex-row w-full justify-center items-center gap-20 my-20">
+          <div className="w-full max-w-2xl">
+            <AspectRatio
+              ratio={16 / 9}
+              className="bg-muted rounded-lg w-full max-w-2xl"
+            >
+              <Image
+                src={imageUrl}
+                alt={title || "Post"}
+                className="object-contain rounded-lg"
+                fill
+              />
+            </AspectRatio>
+          </div>
+          <div className="text-wrap wrap-normal max-w-[40%]">
+            <h1 className="font-bold text-3xl mb-6 ">{title}</h1>
+            <p>{new Date(publishedAt).toDateString()}</p>
+          </div>
+        </div>
+        <div className="flex flex-col gap-2 w-[75%]">
+          <PortableText value={body}></PortableText>
+        </div>
       </div>
     </main>
   );
