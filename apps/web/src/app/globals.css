@@ -134,8 +134,12 @@
   @apply bg-white text-black;
 }
 
-.prose_pro_max {
-  @apply dark:prose-invert prose-p:mb-2 prose-h1:mt-10 prose-a:underline prose-headings:font-bold;
+.post_card_hover:hover {
+  @apply bg-muted transition duration-200;
+}
+
+.the_good_prose_stuff {
+  @apply flex flex-col justify-center w-full px-4 sm:px-8 md:px-12 lg:px-20 xl:px-36 prose-p:text-justify prose-sm sm:prose-lg md:prose-lg lg:prose-xl prose-p:mb-2 prose-a:underline dark:prose-invert prose-h1:mt-10 prose-headings:font-bold;
 }
 
 .hyperlink {

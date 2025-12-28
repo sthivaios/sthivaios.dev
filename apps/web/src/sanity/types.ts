@@ -262,11 +262,18 @@ export type POST_QUERY_RESULT = {
 
 // Source: ../web/src/app/posts/page.tsx
 // Variable: POSTS_QUERY
-// Query: *[  _type == "post"  && defined(slug.current)  && slug.current != "about-me"]|order(date asc){_id, title, slug, publishedAt}
+// Query: *[  _type == "post"  && defined(slug.current)  && slug.current != "about-me"]|order(date asc){_id, title, slug, mainImage, publishedAt}
 export type POSTS_QUERY_RESULT = Array<{
   _id: string;
   title: string | null;
   slug: Slug | null;
+  mainImage: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  } | null;
   publishedAt: string | null;
 }>;
 
@@ -275,6 +282,6 @@ import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
     '*[\n    _type == "post" &&\n    slug.current == "about-me"\n  ][0]': POST_QUERY_RESULT;
-    '*[\n  _type == "post"\n  && defined(slug.current)\n  && slug.current != "about-me"\n]|order(date asc){_id, title, slug, publishedAt}': POSTS_QUERY_RESULT;
+    '*[\n  _type == "post"\n  && defined(slug.current)\n  && slug.current != "about-me"\n]|order(date asc){_id, title, slug, mainImage, publishedAt}': POSTS_QUERY_RESULT;
   }
 }

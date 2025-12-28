@@ -8,6 +8,7 @@ import { sanityFetch } from "@/sanity/live";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import SharePostButton from "@/components/share-post-button";
 import { components } from "@/sanity/portableTextComponents";
+import { Separator } from "@/components/ui/separator";
 
 const POST_QUERY = defineQuery(`*[
     _type == "post" &&
@@ -53,7 +54,7 @@ export default async function EventPage({
           <div
             className={
               `flex flex-col items-center sm:items-center ${imageUrl ? "md:items-start lg:items-start" : ""} text-center sm:text-center md:text-start lg:text-start justify-center` +
-              "text-wrap wrap-normal max-w-[100%] sm:max-w-[100%] md:max-w-[40%] lg:max-w-[40%] gap-2"
+              "text-wrap wrap-normal max-w-full md:max-w-[40%] lg:max-w-[40%] gap-2"
             }
           >
             <Link
@@ -62,7 +63,9 @@ export default async function EventPage({
             >
               ← Back to posts
             </Link>
-            <h1 className="font-bold text-3xl mb-6 ">{title}</h1>
+            <h1 className="font-bold text-xl sm:text-2xl md:text-3xl mb-6 ">
+              {title}
+            </h1>
             {publishedAt ? (
               <p>
                 Published on:{" "}
@@ -76,7 +79,7 @@ export default async function EventPage({
             ) : null}
           </div>
         </div>
-        <div className="flex flex-col justify-center w-[75%] prose-lg dark:prose-invert prose-p:mb-2 prose-h1:mt-10 prose-a:underline prose-">
+        <div className="the_good_prose_stuff">
           {body ? <PortableText value={body} components={components} /> : null}
         </div>
       </div>
