@@ -33,16 +33,8 @@ export default async function EventPage({
 
   return (
     <main className="flex flex-col items-center w-full p-10">
-      <div className="flex flex-row justify-start w-full">
-        <Link
-          href="/"
-          className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white mb-4"
-        >
-          ← Back to posts
-        </Link>
-      </div>
       <div className="flex flex-col items-center justify-center gap-2 w-full">
-        <div className="flex flex-row w-full justify-center items-center gap-20 my-20">
+        <div className="flex flex-row w-full justify-center items-center gap-20 mt-10 mb-20">
           <div className="w-full max-w-2xl">
             <AspectRatio
               ratio={16 / 9}
@@ -56,12 +48,18 @@ export default async function EventPage({
               />
             </AspectRatio>
           </div>
-          <div className="text-wrap wrap-normal max-w-[40%]">
+          <div className="flex flex-col items-start justify-center text-wrap wrap-normal max-w-[40%] gap-2">
+            <Link
+              href="/"
+              className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white mb-4"
+            >
+              ← Back to posts
+            </Link>
             <h1 className="font-bold text-3xl mb-6 ">{title}</h1>
             <p>{new Date(publishedAt).toDateString()}</p>
           </div>
         </div>
-        <div className="flex flex-col gap-2 w-[75%]">
+        <div className="flex flex-col gap-2 w-[75%] text-justify mb-30">
           <PortableText value={body}></PortableText>
         </div>
       </div>

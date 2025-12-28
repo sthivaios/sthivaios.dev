@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, Noto_Sans } from "next/font/google";
 import "./globals.css";
 import { SanityLive } from "@/sanity/live";
+import { ThemeProvider } from "@/components/theme-provider";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 const notoSans = Noto_Sans({ variable: "--font-sans" });
 
@@ -30,7 +32,17 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <div className="flex flex-row w-full p-5 items-center justify-end">
+            <ThemeToggle />
+          </div>
+          {children}
+        </ThemeProvider>
         <SanityLive />
       </body>
     </html>
