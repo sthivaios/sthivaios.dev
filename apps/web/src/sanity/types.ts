@@ -56,11 +56,16 @@ export type Post = {
         _key: string;
       }
     | {
-        asset?: SanityImageAssetReference;
-        media?: unknown;
-        hotspot?: SanityImageHotspot;
-        crop?: SanityImageCrop;
-        _type: "image";
+        image?: {
+          asset?: SanityImageAssetReference;
+          media?: unknown;
+          hotspot?: SanityImageHotspot;
+          crop?: SanityImageCrop;
+          _type: "image";
+        };
+        caption?: string;
+        alt?: string;
+        _type: "inlineImage";
         _key: string;
       }
   >;
@@ -240,11 +245,16 @@ export type POST_QUERY_RESULT = {
         _key: string;
       }
     | {
-        asset?: SanityImageAssetReference;
-        media?: unknown;
-        hotspot?: SanityImageHotspot;
-        crop?: SanityImageCrop;
-        _type: "image";
+        image?: {
+          asset?: SanityImageAssetReference;
+          media?: unknown;
+          hotspot?: SanityImageHotspot;
+          crop?: SanityImageCrop;
+          _type: "image";
+        };
+        caption?: string;
+        alt?: string;
+        _type: "inlineImage";
         _key: string;
       }
   >;
