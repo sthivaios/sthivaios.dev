@@ -3,7 +3,6 @@ import { Geist, Geist_Mono, Noto_Sans } from "next/font/google";
 import "./globals.css";
 import { SanityLive } from "@/sanity/live";
 import { ThemeProvider } from "@/components/theme-provider";
-import { ThemeToggle } from "@/components/theme-toggle";
 import { Toaster } from "@/components/ui/sonner";
 import Navbar from "@/components/navbar";
 
@@ -21,6 +20,15 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "sthivaios.dev",
+  icons: {
+    icon: [
+      {
+        url: "https://cdn.sthivaios.dev/boykisser_square_256.png",
+        sizes: "256x256",
+        type: "image/png",
+      },
+    ],
+  },
 };
 
 export default function RootLayout({
