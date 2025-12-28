@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 
-function Page(props) {
+function Page() {
   return (
     <div className="p-10 flex flex-col gap-2 items-center justify-center">
       Links:
