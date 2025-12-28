@@ -7,15 +7,17 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ThemeToggle } from "@/components/theme-toggle";
 
-const navbarItems: { href: string; label: string; key: number }[] = [
+// the reason that href is an array is that certain browsers and stuff might remove the "/" on home so Home in the navbar isnt bold.
+// so instead it matches against any of the strings in each href array
+const navbarItems: { href: string[]; label: string; key: number }[] = [
   {
     label: "Home",
-    href: "/",
+    href: ["/", ""],
     key: 1,
   },
   {
     label: "Posts",
-    href: "/posts",
+    href: ["/posts"],
     key: 2,
   },
 ];
@@ -27,8 +29,8 @@ function Navbar() {
     <Card className="w-[75%] lg:w-[50%] flex flex-row items-center justify-center relative">
       {navbarItems.map((item) => (
         <Link
-          className={`text-lg ${currentPath == item.href ? "font-bold" : "text-muted-foreground"}`}
-          href={item.href}
+          className={`text-lg ${item.href.includes(currentPath) ? "font-bold" : "text-muted-foreground"}`}
+          href={item.href[0]}
           key={item.key}
         >
           {item.label}
