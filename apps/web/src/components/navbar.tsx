@@ -7,7 +7,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ThemeToggle } from "@/components/theme-toggle";
 
-// the reason that href is an array is that certain browsers and stuff might remove the "/" on home so Home in the navbar isnt bold.
+// the reason that href is an array is that certain browsers and stuff might remove the "/" on home so Home in the navbar isn't bold.
 // so instead it matches against any of the strings in each href array
 const navbarItems: { href: string[]; label: string; key: number }[] = [
   {
@@ -24,10 +24,6 @@ const navbarItems: { href: string[]; label: string; key: number }[] = [
 
 function Navbar() {
   const currentPath = usePathname();
-  console.log({
-    message: "logging the path name to check something, debug moment lol",
-    value: currentPath,
-  });
 
   return (
     <Card className="w-[75%] lg:w-[50%] h-16 flex flex-row items-center justify-center relative">

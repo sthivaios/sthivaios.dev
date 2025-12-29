@@ -8,7 +8,6 @@ import { sanityFetch } from "@/sanity/live";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import SharePostButton from "@/components/share-post-button";
 import { components } from "@/sanity/portableTextComponents";
-import { Separator } from "@/components/ui/separator";
 
 const POST_QUERY = defineQuery(`*[
     _type == "post" &&
