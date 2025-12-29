@@ -16,6 +16,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import ClickableImage from "@/components/clickableImage";
 
 const POST_QUERY = defineQuery(`*[
     _type == "post" &&
@@ -37,13 +38,11 @@ export default async function EventPage({
 
   const { title, slug, publishedAt, mainImage, body } = post;
 
-  const imageUrl = mainImage ? sanityImageUrl(mainImage).quality(80).url() : "";
-
   return (
     <main className="flex flex-col items-center w-full">
       <div className="flex flex-col items-center justify-center gap-2 w-full">
         <div className="flex flex-col sm:flex-col md:flex-col lg:flex-col xl:flex-row w-full justify-center items-center gap-20 mb-20 p-5">
-          {imageUrl ? (
+          {mainImage ? (
             <div className="w-full max-w-2xl">
               <Tooltip>
                 <TooltipContent align="center" side="bottom">
@@ -54,14 +53,10 @@ export default async function EventPage({
                     ratio={16 / 9}
                     className="rounded-lg w-full max-w-2xl"
                   >
-                    <Link href={imageUrl} target="_blank">
-                      <Image
-                        src={imageUrl}
-                        alt={title || "Post"}
-                        className="object-contain rounded-lg"
-                        fill
-                      />
-                    </Link>
+                    <ClickableImage
+                      image={{ imageObject: mainImage }}
+                      postSlug={slug?.current}
+                    />
                   </AspectRatio>
                 </TooltipTrigger>
               </Tooltip>
@@ -69,7 +64,7 @@ export default async function EventPage({
           ) : null}
           <div
             className={
-              `flex flex-col items-center sm:items-center ${imageUrl ? "md:items-center lg:items-center xl:items-start" : ""} text-center sm:text-center md:text-center lg:text-center xl:text-start justify-center` +
+              `flex flex-col items-center sm:items-center ${mainImage ? "md:items-center lg:items-center xl:items-start" : ""} text-center sm:text-center md:text-center lg:text-center xl:text-start justify-center` +
               "text-wrap wrap-normal max-w-full md:max-w-[70%] lg:max-w-[70%] xl:max-w-[40%] gap-2"
             }
           >
