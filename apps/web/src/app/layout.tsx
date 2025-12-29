@@ -42,15 +42,19 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <TooltipProvider>
-            <div className="flex flex-row w-full px-5 py-10 items-center justify-center">
-              <div className="flex flex-col items-center justify-center w-full gap-10">
-                <Banner />
-                <Navbar />
+            <div className="flex flex-col min-h-screen">
+              <div className="flex flex-row w-full px-5 py-10 items-center justify-center">
+                <div className="flex flex-col items-center justify-center w-full gap-10">
+                  <Banner />
+                  <Navbar />
+                </div>
               </div>
-            </div>
-            <div className="p-0">{children}</div>
-            <div className="p-10 flex flex-row items-center justify-center w-full">
-              <p className="text-muted">Stratos Thivaios © 2025</p>
+              <div className="p-0 flex-1">{children}</div>
+              <div className="p-10 flex flex-row items-center justify-center w-full">
+                <p className="rainbow transition-all duration-200">
+                  Stratos Thivaios © 2025
+                </p>
+              </div>
             </div>
           </TooltipProvider>
         </ThemeProvider>
