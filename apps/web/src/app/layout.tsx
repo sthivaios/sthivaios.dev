@@ -5,6 +5,7 @@ import { SanityLive } from "@/sanity/live";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
 import Navbar from "@/components/navbar";
+import { Analytics } from "@vercel/analytics/next";
 
 const jetbrainsMono = JetBrains_Mono({
   variable: "--font-sans",
@@ -48,6 +49,7 @@ export default function RootLayout({
         </ThemeProvider>
         <SanityLive />
         <Toaster richColors={true} />
+        <Analytics />
       </body>
     </html>
   );
