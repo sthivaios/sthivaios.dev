@@ -8,11 +8,14 @@ import { sanityFetch } from "@/sanity/live";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import SharePostButton from "@/components/share-post-button";
 import { components } from "@/sanity/portableTextComponents";
+import { Separator } from "@/components/ui/separator";
+import { Calendar, Clock, Hourglass } from "lucide-react";
+import PostReadingTime from "@/components/postReadingTime";
 
 const POST_QUERY = defineQuery(`*[
     _type == "post" &&
     slug.current == $slug
-][0]`);
+][0]{title, slug, publishedAt, mainImage, body, "estimatedWordCount": round(length(pt::text(body)) / 5)}`);
 
 export default async function EventPage({
   params,
@@ -27,7 +30,8 @@ export default async function EventPage({
     notFound();
   }
 
-  const { title, slug, publishedAt, mainImage, body } = post;
+  const { title, slug, publishedAt, mainImage, body, estimatedWordCount } =
+    post;
 
   const imageUrl = mainImage ? sanityImageUrl(mainImage).quality(80).url() : "";
 
@@ -65,14 +69,19 @@ export default async function EventPage({
             <h1 className="font-bold text-xl sm:text-2xl md:text-3xl mb-6 ">
               {title}
             </h1>
-            {publishedAt ? (
-              <p>
-                Published on:{" "}
-                <span className="font-bold">
-                  {new Date(publishedAt).toISOString().slice(0, 10)}
-                </span>
-              </p>
-            ) : null}
+            <div className="flex flex-row items-center gap-4 h-6">
+              {publishedAt ? (
+                <div className="flex flex-row items-center gap-2">
+                  <Calendar />
+                  <p>{new Date(publishedAt).toISOString().slice(0, 10)}</p>
+                </div>
+              ) : null}
+              <Separator orientation={"vertical"} />
+              <div className="flex flex-row items-center gap-2">
+                <Clock />
+                <PostReadingTime body={body} />
+              </div>
+            </div>
             {slug?.current ? (
               <SharePostButton slug={slug.current} pointerCursor />
             ) : null}
