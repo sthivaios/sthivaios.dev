@@ -1,26 +1,28 @@
+"use client";
+
 import Link from "next/link";
-import { defineQuery } from "next-sanity";
-import { sanityFetch } from "@/sanity/live";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import Image from "next/image";
 import { sanityImageUrl } from "@/sanity/image";
 import PostSearch from "@/components/search";
+import { fetchPosts } from "@/app/posts/fetchPosts";
+import { useState } from "react";
+import { Post } from "@/sanity/types";
 
-const POSTS_QUERY = defineQuery(`*[
-  _type == "post"
-  && defined(slug.current)
-  && slug.current != "about-me"
-]|order(date asc){_id, title, slug, mainImage, publishedAt, tag}`);
+export default function IndexPage() {
+  const [posts, setPosts] = useState([]);
 
-export default async function IndexPage() {
-  const { data: posts } = await sanityFetch({ query: POSTS_QUERY });
+  const getPosts = async (searchTerm: string) => {
+    const posts = await fetchPosts(searchTerm);
+    setPosts(posts);
+  };
 
   return (
     <main className="flex flex-col w-full items-center justify-center gap-10 mt-5">
       {/*<h1 className="text-4xl font-bold">Posts</h1>*/}
-      <PostSearch></PostSearch>
+      <PostSearch callback={getPosts}></PostSearch>
       <ul className="flex flex-row flex-wrap w-full items-center justify-center gap-10 p-5">
         {posts.length == 0 ? "Woah... looks like there are no posts yet" : null}
         {posts.map((post) => (
