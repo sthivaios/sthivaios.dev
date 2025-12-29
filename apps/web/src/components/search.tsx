@@ -3,24 +3,17 @@
 import React, { useEffect, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Kbd } from "@/components/ui/kbd";
 import { useDebounce } from "use-debounce";
 
-function PostSearch(props: {
-  searchCallback: (searchTerm: string) => void;
-  loadingCallback: () => void;
-}) {
+function PostSearch(props: { searchCallback: (searchTerm: string) => void }) {
   const [searchTerm, setSearchTerm] = useState("");
   const [debouncedSearchTerm] = useDebounce(searchTerm, 1000);
 
-  useEffect(() => {
-    props.searchCallback(searchTerm);
-  }, [debouncedSearchTerm]);
+  const { searchCallback } = props;
 
   useEffect(() => {
-    props.loadingCallback();
-  }, [searchTerm]);
+    searchCallback(debouncedSearchTerm);
+  }, [debouncedSearchTerm, searchCallback]);
 
   return (
     <div className="w-full flex flex-row items-center justify-center">
