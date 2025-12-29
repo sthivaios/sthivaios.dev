@@ -2,15 +2,9 @@
 
 import React, { useEffect, useState } from "react";
 import { Input } from "@/components/ui/input";
-import { useDebounce } from "use-debounce";
 
 function PostSearch(props: { callback: (searchTerm: string) => void }) {
-  const [searchTerm, setSearchTerm] = useState("Hello");
-  const [debouncedSearchTerm] = useDebounce(searchTerm, 1000);
-
-  useEffect(() => {
-    props.callback(debouncedSearchTerm);
-  }, [debouncedSearchTerm, props.callback]);
+  const [searchTerm, setSearchTerm] = useState("");
 
   return (
     <div className="w-full flex flex-row items-center justify-center">
@@ -20,6 +14,9 @@ function PostSearch(props: { callback: (searchTerm: string) => void }) {
         value={searchTerm}
         onChange={(e) => {
           setSearchTerm(e.target.value);
+        }}
+        onKeyDown={() => {
+          props.callback(searchTerm);
         }}
       ></Input>
     </div>
