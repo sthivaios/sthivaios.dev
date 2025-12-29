@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import Image from "next/image";
 import { sanityImageUrl } from "@/sanity/image";
+import PostSearch from "@/components/search";
 
 const POSTS_QUERY = defineQuery(`*[
   _type == "post"
@@ -19,6 +20,7 @@ export default async function IndexPage() {
   return (
     <main className="flex flex-col w-full items-center justify-center gap-10 mt-5">
       {/*<h1 className="text-4xl font-bold">Posts</h1>*/}
+      <PostSearch></PostSearch>
       <ul className="flex flex-row flex-wrap w-full items-center justify-center gap-10 p-5">
         {posts.length == 0 ? "Woah... looks like there are no posts yet" : null}
         {posts.map((post) => (
