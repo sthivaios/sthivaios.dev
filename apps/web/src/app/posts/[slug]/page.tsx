@@ -9,13 +9,13 @@ import { AspectRatio } from "@/components/ui/aspect-ratio";
 import SharePostButton from "@/components/share-post-button";
 import { components } from "@/sanity/portableTextComponents";
 import { Separator } from "@/components/ui/separator";
-import { Calendar, Clock, Hourglass } from "lucide-react";
+import { Calendar, Clock } from "lucide-react";
 import PostReadingTime from "@/components/postReadingTime";
 
 const POST_QUERY = defineQuery(`*[
     _type == "post" &&
     slug.current == $slug
-][0]{title, slug, publishedAt, mainImage, body, "estimatedWordCount": round(length(pt::text(body)) / 5)}`);
+][0]{title, slug, publishedAt, mainImage, body`);
 
 export default async function EventPage({
   params,
@@ -30,8 +30,7 @@ export default async function EventPage({
     notFound();
   }
 
-  const { title, slug, publishedAt, mainImage, body, estimatedWordCount } =
-    post;
+  const { title, slug, publishedAt, mainImage, body } = post;
 
   const imageUrl = mainImage ? sanityImageUrl(mainImage).quality(80).url() : "";
 
