@@ -9,6 +9,7 @@ export default {
       name: 'title',
       title: 'Title',
       type: 'string',
+      validation: (rule: Rule) => rule.required().error('You cannot make a post without a title!'),
     },
     {
       name: 'slug',
@@ -32,6 +33,14 @@ export default {
       name: 'publishedAt',
       title: 'Published at',
       type: 'datetime',
+      validation: (rule: Rule) => rule.required().error('"Published at" is required.'),
+    },
+    {
+      name: 'tag',
+      title: 'Tag',
+      type: 'string',
+      validation: (rule: Rule) =>
+        rule.required().warning("While tags aren't required, the post should have one"),
     },
     {
       name: 'body',

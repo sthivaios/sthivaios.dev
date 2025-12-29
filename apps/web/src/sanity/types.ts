@@ -36,6 +36,7 @@ export type Post = {
     _type: "image";
   };
   publishedAt?: string;
+  tag?: string;
   body?: Array<
     | {
         children?: Array<{
@@ -225,6 +226,7 @@ export type POST_QUERY_RESULT = {
     _type: "image";
   };
   publishedAt?: string;
+  tag?: string;
   body?: Array<
     | {
         children?: Array<{
