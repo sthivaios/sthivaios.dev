@@ -24,6 +24,10 @@ const navbarItems: { href: string[]; label: string; key: number }[] = [
 
 function Navbar() {
   const currentPath = usePathname();
+  console.log({
+    message: "logging the path name to check something, debug moment lol",
+    value: currentPath,
+  });
 
   return (
     <Card className="w-[75%] lg:w-[50%] h-16 flex flex-row items-center justify-center relative">
