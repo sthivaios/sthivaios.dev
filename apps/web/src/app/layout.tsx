@@ -6,6 +6,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
 import Navbar from "@/components/navbar";
 import { Analytics } from "@vercel/analytics/next";
+import Banner from "@/components/banner";
 
 const jetbrainsMono = JetBrains_Mono({
   variable: "--font-sans",
@@ -39,8 +40,11 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <div className="flex flex-row w-full p-5 items-center justify-center mt-10">
-            <Navbar />
+          <div className="flex flex-row w-full px-5 py-10 items-center justify-center">
+            <div className="flex flex-col items-center justify-center w-full gap-10">
+              <Banner />
+              <Navbar />
+            </div>
           </div>
           <div className="p-0">{children}</div>
           <div className="p-10 flex flex-row items-center justify-center w-full">
