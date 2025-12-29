@@ -7,7 +7,7 @@ import { AspectRatio } from "@/components/ui/aspect-ratio";
 import Image from "next/image";
 import Search from "@/components/search";
 import { fetchPosts } from "@/app/posts/fetchPosts";
-import { useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import { sanityImageUrl } from "@/sanity/image";
 import { POSTS_QUERY_RESULT } from "@/sanity/types";
 import { TriangleAlert } from "lucide-react";
@@ -16,37 +16,18 @@ import { Spinner } from "@/components/ui/spinner";
 export default function IndexPage() {
   const [posts, setPosts] = useState<POSTS_QUERY_RESULT>([]);
   const [loading, setLoading] = useState(true);
-  const [loadingFromSearch, setLoadingFromSearch] = useState(false);
 
-  const showLoading = () => {
-    setLoading(true);
-    setLoadingFromSearch(true);
-  };
-
-  const search = async (searchTerm: string) => {
+  const search = useCallback(async (searchTerm: string) => {
     setLoading(true);
     const fetched = await fetchPosts(searchTerm == "" ? "*" : searchTerm);
     setPosts(fetched);
-    // setLoading(false);
-    // setLoadingFromSearch(false);
-  };
-
-  // useEffect(() => {
-  //   const fetch = async () => {
-  //     search("*");
-  //   };
-  //   fetch();
-  // }, []);
+    setLoading(false);
+  }, []);
 
   if (posts == undefined) {
     return (
       <main className="flex flex-col w-full items-center justify-center gap-10 mt-5">
-        <Search
-          searchCallback={search}
-          loadingCallback={() => {
-            showLoading();
-          }}
-        />
+        <Search searchCallback={search} />
         <ul className="flex flex-row flex-wrap w-full items-center justify-center gap-10 p-5">
           <div className="flex flex-col justify-center items-center gap-4">
             <TriangleAlert />
@@ -64,12 +45,7 @@ export default function IndexPage() {
   if (loading) {
     return (
       <main className="flex flex-col w-full items-center justify-center gap-10 mt-5">
-        <Search
-          searchCallback={search}
-          loadingCallback={() => {
-            showLoading();
-          }}
-        />
+        <Search searchCallback={search} />
         <ul className="flex flex-row flex-wrap w-full items-center justify-center gap-10 p-5">
           <div className="flex flex-col justify-center items-center gap-4">
             <Spinner className="size-8" />
@@ -82,12 +58,7 @@ export default function IndexPage() {
 
   return (
     <main className="flex flex-col w-full items-center justify-center gap-10 mt-5">
-      <Search
-        searchCallback={search}
-        loadingCallback={() => {
-          showLoading();
-        }}
-      />
+      <Search searchCallback={search} />
       <ul className="flex flex-row flex-wrap w-full items-center justify-center gap-10 p-5">
         {posts.length == 0 ? "Woah... looks like there are no posts yet" : null}
         {posts.map((post) => (
@@ -106,6 +77,8 @@ export default function IndexPage() {
                         .url()}
                       alt={post?.title || "Post"}
                       className="object-contain rounded-lg"
+                      sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 672px"
+                      loading="eager"
                       fill
                     />
                   </AspectRatio>
