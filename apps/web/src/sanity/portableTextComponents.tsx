@@ -1,6 +1,4 @@
-import Image from "next/image";
 import { PortableTextComponents } from "next-sanity";
-import { sanityImageUrl } from "@/sanity/image";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import Link from "next/link";
 
@@ -9,6 +7,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import ClickableImage from "@/components/clickableImage";
 
 export const components: PortableTextComponents = {
   types: {
@@ -25,24 +24,11 @@ export const components: PortableTextComponents = {
                   ratio={16 / 9}
                   className="rounded-lg w-full max-w-2xl"
                 >
-                  <Link
-                    href={sanityImageUrl(props.value.image).url()}
-                    target="_blank"
-                  >
-                    <Image
-                      src={sanityImageUrl(props.value.image)
-                        .quality(80)
-                        .auto("format")
-                        .url()}
-                      alt={props?.value?.alt || ""}
-                      className="object-contain not-prose rounded-lg"
-                      fill
-                    />
-                  </Link>
+                  <ClickableImage image={{ imageObject: props.value.image }} />
                 </AspectRatio>
               </TooltipTrigger>
             </Tooltip>
-            <p className="text-center px-5 text-muted-foreground">
+            <p className="text-center p-5 text-muted-foreground">
               {props?.value?.caption}
             </p>
           </div>
