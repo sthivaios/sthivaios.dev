@@ -37,7 +37,7 @@ export default async function EventPage({
   return (
     <main className="flex flex-col items-center w-full">
       <div className="flex flex-col items-center justify-center gap-2 w-full">
-        <div className="flex flex-col sm:flex-col md:flex-row lg:flex-row w-full justify-center items-center gap-20 mb-20 p-5">
+        <div className="flex flex-col sm:flex-col md:flex-col lg:flex-col xl:flex-row w-full justify-center items-center gap-20 mb-20 p-5">
           {imageUrl ? (
             <div className="w-full max-w-2xl">
               <AspectRatio
@@ -55,8 +55,8 @@ export default async function EventPage({
           ) : null}
           <div
             className={
-              `flex flex-col items-center sm:items-center ${imageUrl ? "md:items-start lg:items-start" : ""} text-center sm:text-center md:text-start lg:text-start justify-center` +
-              "text-wrap wrap-normal max-w-full md:max-w-[40%] lg:max-w-[40%] gap-2"
+              `flex flex-col items-center sm:items-center ${imageUrl ? "md:items-center lg:items-center xl:items-start" : ""} text-center sm:text-center md:text-center lg:text-center xl:text-start justify-center` +
+              "text-wrap wrap-normal max-w-full md:max-w-[70%] lg:max-w-[70%] xl:max-w-[40%] gap-2"
             }
           >
             <Link
