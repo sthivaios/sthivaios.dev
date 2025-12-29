@@ -143,5 +143,5 @@
 }
 
 .hyperlink {
-  @apply text-primary hover:text-primary-foreground transition duration-200 ease-in-out;
+  @apply text-primary hover:text-blue-300 transition duration-200 ease-in-out;
 }
