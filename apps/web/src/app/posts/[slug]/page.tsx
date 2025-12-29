@@ -15,7 +15,7 @@ import PostReadingTime from "@/components/postReadingTime";
 const POST_QUERY = defineQuery(`*[
     _type == "post" &&
     slug.current == $slug
-][0]{title, slug, publishedAt, mainImage, body`);
+][0]`);
 
 export default async function EventPage({
   params,
