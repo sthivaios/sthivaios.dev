@@ -5,13 +5,13 @@ import { notFound } from "next/navigation";
 import { components } from "@/sanity/portableTextComponents";
 
 async function Page() {
-  const POST_QUERY = defineQuery(`*[
+  const ABOUTME_QUERY = defineQuery(`*[
     _type == "post" &&
     slug.current == "about-me"
   ][0]`);
 
   const { data: post } = await sanityFetch({
-    query: POST_QUERY,
+    query: ABOUTME_QUERY,
   });
   if (!post) {
     notFound();
