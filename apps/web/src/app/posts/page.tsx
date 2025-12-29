@@ -5,24 +5,89 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import Image from "next/image";
-import { sanityImageUrl } from "@/sanity/image";
-import PostSearch from "@/components/search";
+import Search from "@/components/search";
 import { fetchPosts } from "@/app/posts/fetchPosts";
-import { useState } from "react";
-import { Post } from "@/sanity/types";
+import { useEffect, useState } from "react";
+import { sanityImageUrl } from "@/sanity/image";
+import { POSTS_QUERY_RESULT } from "@/sanity/types";
+import { TriangleAlert } from "lucide-react";
+import { Spinner } from "@/components/ui/spinner";
 
 export default function IndexPage() {
-  const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useState<POSTS_QUERY_RESULT>([]);
+  const [loading, setLoading] = useState(true);
+  const [loadingFromSearch, setLoadingFromSearch] = useState(false);
 
-  const getPosts = async (searchTerm: string) => {
-    const posts = await fetchPosts(searchTerm);
-    setPosts(posts);
+  const showLoading = () => {
+    setLoading(true);
+    setLoadingFromSearch(true);
   };
+
+  const search = async (searchTerm: string) => {
+    setLoading(true);
+    const fetched = await fetchPosts(searchTerm == "" ? "*" : searchTerm);
+    setPosts(fetched);
+    // setLoading(false);
+    // setLoadingFromSearch(false);
+  };
+
+  // useEffect(() => {
+  //   const fetch = async () => {
+  //     search("*");
+  //   };
+  //   fetch();
+  // }, []);
+
+  if (posts == undefined) {
+    return (
+      <main className="flex flex-col w-full items-center justify-center gap-10 mt-5">
+        <Search
+          searchCallback={search}
+          loadingCallback={() => {
+            showLoading();
+          }}
+        />
+        <ul className="flex flex-row flex-wrap w-full items-center justify-center gap-10 p-5">
+          <div className="flex flex-col justify-center items-center gap-4">
+            <TriangleAlert />
+            <p className="text-center">
+              Well this is embarrassing...
+              <br />
+              There was an error fetching the posts
+            </p>
+          </div>
+        </ul>
+      </main>
+    );
+  }
+
+  if (loading) {
+    return (
+      <main className="flex flex-col w-full items-center justify-center gap-10 mt-5">
+        <Search
+          searchCallback={search}
+          loadingCallback={() => {
+            showLoading();
+          }}
+        />
+        <ul className="flex flex-row flex-wrap w-full items-center justify-center gap-10 p-5">
+          <div className="flex flex-col justify-center items-center gap-4">
+            <Spinner className="size-8" />
+            <p className="text-center">Loading...</p>
+          </div>
+        </ul>
+      </main>
+    );
+  }
 
   return (
     <main className="flex flex-col w-full items-center justify-center gap-10 mt-5">
-      {/*<h1 className="text-4xl font-bold">Posts</h1>*/}
-      <PostSearch callback={getPosts}></PostSearch>
+      <Search
+        searchCallback={search}
+        loadingCallback={() => {
+          showLoading();
+        }}
+      />
       <ul className="flex flex-row flex-wrap w-full items-center justify-center gap-10 p-5">
         {posts.length == 0 ? "Woah... looks like there are no posts yet" : null}
         {posts.map((post) => (
