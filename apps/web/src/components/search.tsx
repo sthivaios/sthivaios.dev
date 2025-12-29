@@ -1,15 +1,29 @@
 "use client";
 
-import React from "react";
-import { Card } from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { ThemeToggle } from "@/components/theme-toggle";
+import React, { useEffect, useState } from "react";
 import { Input } from "@/components/ui/input";
+import { useDebounce } from "use-debounce";
 
-function PostSearch() {
-  return <Input className="w-[25%]" placeholder="search for a post..."></Input>;
+function PostSearch(props: { callback: (searchTerm: string) => void }) {
+  const [searchTerm, setSearchTerm] = useState("Hello");
+  const [debouncedSearchTerm] = useDebounce(searchTerm, 1000);
+
+  useEffect(() => {
+    props.callback(debouncedSearchTerm);
+  }, [debouncedSearchTerm, props.callback]);
+
+  return (
+    <div className="w-full flex flex-row items-center justify-center">
+      <Input
+        className="w-[25%]"
+        placeholder="search for a post..."
+        value={searchTerm}
+        onChange={(e) => {
+          setSearchTerm(e.target.value);
+        }}
+      ></Input>
+    </div>
+  );
 }
 
 export default PostSearch;
