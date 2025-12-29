@@ -11,6 +11,11 @@ import { components } from "@/sanity/portableTextComponents";
 import { Separator } from "@/components/ui/separator";
 import { Calendar, Clock } from "lucide-react";
 import PostReadingTime from "@/components/postReadingTime";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 const POST_QUERY = defineQuery(`*[
     _type == "post" &&
@@ -40,17 +45,26 @@ export default async function EventPage({
         <div className="flex flex-col sm:flex-col md:flex-col lg:flex-col xl:flex-row w-full justify-center items-center gap-20 mb-20 p-5">
           {imageUrl ? (
             <div className="w-full max-w-2xl">
-              <AspectRatio
-                ratio={16 / 9}
-                className="rounded-lg w-full max-w-2xl"
-              >
-                <Image
-                  src={imageUrl}
-                  alt={title || "Post"}
-                  className="object-contain rounded-lg"
-                  fill
-                />
-              </AspectRatio>
+              <Tooltip>
+                <TooltipContent align="center" side="bottom">
+                  You can click on the image to open it in a new tab
+                </TooltipContent>
+                <TooltipTrigger asChild={true}>
+                  <AspectRatio
+                    ratio={16 / 9}
+                    className="rounded-lg w-full max-w-2xl"
+                  >
+                    <Link href={imageUrl} target="_blank">
+                      <Image
+                        src={imageUrl}
+                        alt={title || "Post"}
+                        className="object-contain rounded-lg"
+                        fill
+                      />
+                    </Link>
+                  </AspectRatio>
+                </TooltipTrigger>
+              </Tooltip>
             </div>
           ) : null}
           <div
