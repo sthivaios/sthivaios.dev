@@ -40,7 +40,11 @@ export default {
       title: 'Tag',
       type: 'string',
       validation: (rule: Rule) =>
-        rule.required().warning("While tags aren't required, the post should have one"),
+        rule
+          .max(40)
+          .error(
+            'A tag cannot be longer than 60 characters, in order to render properly on the frontend.',
+          ),
     },
     {
       name: 'body',

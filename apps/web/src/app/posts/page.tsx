@@ -11,7 +11,7 @@ const POSTS_QUERY = defineQuery(`*[
   _type == "post"
   && defined(slug.current)
   && slug.current != "about-me"
-]|order(date asc){_id, title, slug, mainImage, publishedAt}`);
+]|order(date asc){_id, title, slug, mainImage, publishedAt, tag}`);
 
 export default async function IndexPage() {
   const { data: posts } = await sanityFetch({ query: POSTS_QUERY });
@@ -46,13 +46,16 @@ export default async function IndexPage() {
                   {post?.title}
                 </h2>
 
-                {post?.publishedAt && (
-                  <div className="flex flex-row w-full justify-end">
+                <div className="flex flex-row w-full justify-between">
+                  {post?.publishedAt && (
                     <Badge className="">
                       {new Date(post.publishedAt).toISOString().slice(0, 10)}
                     </Badge>
-                  </div>
-                )}
+                  )}
+                  {post?.tag ? (
+                    <Badge className="">Tag: {post.tag}</Badge>
+                  ) : null}
+                </div>
               </Card>
             </Link>
           </li>

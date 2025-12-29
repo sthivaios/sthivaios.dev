@@ -208,8 +208,63 @@ export type AllSanitySchemaTypes =
 export declare const internalGroqTypeReferenceTo: unique symbol;
 
 // Source: ../web/src/app/page.tsx
-// Variable: POST_QUERY
+// Variable: ABOUTME_QUERY
 // Query: *[    _type == "post" &&    slug.current == "about-me"  ][0]
+export type ABOUTME_QUERY_RESULT = {
+  _id: string;
+  _type: "post";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  slug?: Slug;
+  mainImage?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  publishedAt?: string;
+  tag?: string;
+  body?: Array<
+    | {
+        children?: Array<{
+          marks?: Array<string>;
+          text?: string;
+          _type: "span";
+          _key: string;
+        }>;
+        style?: "blockquote" | "code" | "h1" | "h2" | "h3" | "normal";
+        listItem?: "bullet" | "number";
+        markDefs?: Array<{
+          href?: string;
+          _type: "link";
+          _key: string;
+        }>;
+        level?: number;
+        _type: "block";
+        _key: string;
+      }
+    | {
+        image?: {
+          asset?: SanityImageAssetReference;
+          media?: unknown;
+          hotspot?: SanityImageHotspot;
+          crop?: SanityImageCrop;
+          _type: "image";
+        };
+        caption?: string;
+        alt?: string;
+        _type: "inlineImage";
+        _key: string;
+      }
+  >;
+} | null;
+
+// Source: ../web/src/app/posts/[slug]/page.tsx
+// Variable: POST_QUERY
+// Query: *[    _type == "post" &&    slug.current == $slug][0]
 export type POST_QUERY_RESULT = {
   _id: string;
   _type: "post";
@@ -264,7 +319,7 @@ export type POST_QUERY_RESULT = {
 
 // Source: ../web/src/app/posts/page.tsx
 // Variable: POSTS_QUERY
-// Query: *[  _type == "post"  && defined(slug.current)  && slug.current != "about-me"]|order(date asc){_id, title, slug, mainImage, publishedAt}
+// Query: *[  _type == "post"  && defined(slug.current)  && slug.current != "about-me"]|order(date asc){_id, title, slug, mainImage, publishedAt, tag}
 export type POSTS_QUERY_RESULT = Array<{
   _id: string;
   title: string | null;
@@ -277,13 +332,15 @@ export type POSTS_QUERY_RESULT = Array<{
     _type: "image";
   } | null;
   publishedAt: string | null;
+  tag: string | null;
 }>;
 
 // Query TypeMap
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    '*[\n    _type == "post" &&\n    slug.current == "about-me"\n  ][0]': POST_QUERY_RESULT;
-    '*[\n  _type == "post"\n  && defined(slug.current)\n  && slug.current != "about-me"\n]|order(date asc){_id, title, slug, mainImage, publishedAt}': POSTS_QUERY_RESULT;
+    '*[\n    _type == "post" &&\n    slug.current == "about-me"\n  ][0]': ABOUTME_QUERY_RESULT;
+    '*[\n    _type == "post" &&\n    slug.current == $slug\n][0]': POST_QUERY_RESULT;
+    '*[\n  _type == "post"\n  && defined(slug.current)\n  && slug.current != "about-me"\n]|order(date asc){_id, title, slug, mainImage, publishedAt, tag}': POSTS_QUERY_RESULT;
   }
 }
