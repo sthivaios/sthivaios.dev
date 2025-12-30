@@ -317,9 +317,9 @@ export type POST_QUERY_RESULT = {
   >;
 } | null;
 
-// Source: ../web/src/app/posts/page.tsx
+// Source: ../web/src/app/posts/fetchPosts.ts
 // Variable: POSTS_QUERY
-// Query: *[  _type == "post"  && defined(slug.current)  && slug.current != "about-me"]|order(date asc){_id, title, slug, mainImage, publishedAt, tag}
+// Query: *[  _type == "post"  && defined(slug.current)  && slug.current != "about-me"  && [title, body[].children[].text, tag] match $searchTerm]|order(date asc){_id, title, slug, mainImage, publishedAt, tag}
 export type POSTS_QUERY_RESULT = Array<{
   _id: string;
   title: string | null;
@@ -341,6 +341,6 @@ declare module "@sanity/client" {
   interface SanityQueries {
     '*[\n    _type == "post" &&\n    slug.current == "about-me"\n  ][0]': ABOUTME_QUERY_RESULT;
     '*[\n    _type == "post" &&\n    slug.current == $slug\n][0]': POST_QUERY_RESULT;
-    '*[\n  _type == "post"\n  && defined(slug.current)\n  && slug.current != "about-me"\n]|order(date asc){_id, title, slug, mainImage, publishedAt, tag}': POSTS_QUERY_RESULT;
+    '*[\n  _type == "post"\n  && defined(slug.current)\n  && slug.current != "about-me"\n  && [title, body[].children[].text, tag] match $searchTerm\n]|order(date asc){_id, title, slug, mainImage, publishedAt, tag}': POSTS_QUERY_RESULT;
   }
 }
