@@ -86,7 +86,7 @@ export default function IndexPage() {
     <main className="flex flex-col w-full items-center justify-center gap-10 mt-5">
       <Search searchCallback={search} tags={tags} />
       <ul className="flex flex-row flex-wrap w-full items-center justify-center gap-10 p-5">
-        {posts.length == 0 ? "Woah... looks like there are no posts yet" : null}
+        {posts.length == 0 ? "Woah... no posts found" : null}
         {posts.map((post) => (
           <li className="" key={post._id}>
             <Link className="block" href={`/posts/${post?.slug?.current}`}>

@@ -104,15 +104,12 @@ function StatusList(props: {
             >
               <div className="flex flex-row items-center gap-2">
                 <Checkbox
-                  id={`checkbox-${tag.value.replace(" ", "-")}`}
                   checked={props.selectedTags.includes(tag.value)}
                   onCheckedChange={() => {
                     toggleTag(tag.value);
                   }}
                 />
-                <Label htmlFor={`checkbox-${tag.value.replace(" ", "-")}`}>
-                  {tag.label}
-                </Label>
+                <Label>{tag.label}</Label>
               </div>
             </CommandItem>
           ))}
