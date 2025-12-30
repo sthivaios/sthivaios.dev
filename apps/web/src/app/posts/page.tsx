@@ -13,21 +13,47 @@ import { POSTS_QUERY_RESULT } from "@/sanity/types";
 import { TriangleAlert } from "lucide-react";
 import { Spinner } from "@/components/ui/spinner";
 
+export type TagArray = {
+  value: string;
+  label: string;
+}[];
+
 export default function IndexPage() {
   const [posts, setPosts] = useState<POSTS_QUERY_RESULT>([]);
-  const [loading, setLoading] = useState(true);
+  const [tags, setTags] = useState<TagArray>([]);
+  const [loading, setLoading] = useState<boolean>(true);
 
-  const search = useCallback(async (searchTerm: string) => {
+  const generateTagArray = async (fetched: POSTS_QUERY_RESULT) => {
+    const tags: TagArray = [];
+    fetched.forEach((post) => {
+      if (post.tag) {
+        tags.push({
+          value: post.tag,
+          label: post.tag,
+        });
+      }
+    });
+    return tags;
+  };
+
+  const search = useCallback(async (searchTerm: string, tags: string[]) => {
     setLoading(true);
-    const fetched = await fetchPosts(searchTerm == "" ? "*" : searchTerm);
-    setPosts(fetched);
+    const fetched: POSTS_QUERY_RESULT = await fetchPosts(
+      searchTerm == "" ? "*" : searchTerm,
+    );
+    setPosts(
+      tags.length == 0
+        ? fetched
+        : fetched.filter((post) => tags.includes(post.tag ?? "")),
+    );
+    setTags(await generateTagArray(fetched));
     setLoading(false);
   }, []);
 
   if (posts == undefined) {
     return (
       <main className="flex flex-col w-full items-center justify-center gap-10 mt-5">
-        <Search searchCallback={search} />
+        <Search searchCallback={search} tags={tags} />
         <ul className="flex flex-row flex-wrap w-full items-center justify-center gap-10 p-5">
           <div className="flex flex-col justify-center items-center gap-4">
             <TriangleAlert />
@@ -45,7 +71,7 @@ export default function IndexPage() {
   if (loading) {
     return (
       <main className="flex flex-col w-full items-center justify-center gap-10 mt-5">
-        <Search searchCallback={search} />
+        <Search searchCallback={search} tags={tags} />
         <ul className="flex flex-row flex-wrap w-full items-center justify-center gap-10 p-5">
           <div className="flex flex-col justify-center items-center gap-4">
             <Spinner className="size-8" />
@@ -58,7 +84,7 @@ export default function IndexPage() {
 
   return (
     <main className="flex flex-col w-full items-center justify-center gap-10 mt-5">
-      <Search searchCallback={search} />
+      <Search searchCallback={search} tags={tags} />
       <ul className="flex flex-row flex-wrap w-full items-center justify-center gap-10 p-5">
         {posts.length == 0 ? "Woah... looks like there are no posts yet" : null}
         {posts.map((post) => (
@@ -84,7 +110,7 @@ export default function IndexPage() {
                   </AspectRatio>
                 </div>
 
-                <h2 className="text-xl text-center font-semibold text-wrap line-clamp-2 w-full">
+                <h2 className="text-xl text-justify font-semibold text-wrap line-clamp-2 w-full">
                   {post?.title}
                 </h2>
 
