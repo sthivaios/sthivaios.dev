@@ -9,17 +9,22 @@ import { TagArray } from "@/app/posts/page";
 
 function PostSearch(props: {
   searchCallback: (searchTerm: string, tagFilter: string[]) => void;
+  loadingCallback: (loading: boolean) => void;
   tags?: TagArray;
 }) {
   const [searchTerm, setSearchTerm] = useState("");
   const [tag, setTag] = useState<string[]>([]);
   const [debouncedSearchTerm] = useDebounce(searchTerm, 1000);
 
-  const { searchCallback } = props;
+  const { searchCallback, loadingCallback } = props;
 
   useEffect(() => {
     searchCallback(debouncedSearchTerm, tag);
   }, [debouncedSearchTerm, tag, searchCallback]);
+
+  useEffect(() => {
+    loadingCallback(true);
+  }, [searchTerm]);
 
   return (
     <div className="w-full flex flex-row items-center justify-center">

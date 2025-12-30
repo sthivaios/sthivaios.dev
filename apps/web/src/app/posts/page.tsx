@@ -53,7 +53,11 @@ export default function IndexPage() {
   if (posts == undefined) {
     return (
       <main className="flex flex-col w-full items-center justify-center gap-10 mt-5">
-        <Search searchCallback={search} tags={tags} />
+        <Search
+          searchCallback={search}
+          loadingCallback={setLoading}
+          tags={tags}
+        />
         <ul className="flex flex-row flex-wrap w-full items-center justify-center gap-10 p-5">
           <div className="flex flex-col justify-center items-center gap-4">
             <TriangleAlert />
@@ -71,7 +75,11 @@ export default function IndexPage() {
   if (loading) {
     return (
       <main className="flex flex-col w-full items-center justify-center gap-10 mt-5">
-        <Search searchCallback={search} tags={tags} />
+        <Search
+          searchCallback={search}
+          loadingCallback={setLoading}
+          tags={tags}
+        />
         <ul className="flex flex-row flex-wrap w-full items-center justify-center gap-10 p-5">
           <div className="flex flex-col justify-center items-center gap-4">
             <Spinner className="size-8" />
@@ -84,7 +92,11 @@ export default function IndexPage() {
 
   return (
     <main className="flex flex-col w-full items-center justify-center gap-10 mt-5">
-      <Search searchCallback={search} tags={tags} />
+      <Search
+        searchCallback={search}
+        loadingCallback={setLoading}
+        tags={tags}
+      />
       <ul className="flex flex-row flex-wrap w-full items-center justify-center gap-10 p-5">
         {posts.length == 0 ? "Woah... no posts found" : null}
         {posts.map((post) => (
