@@ -28,6 +28,8 @@ export async function POST(req: NextRequest) {
       }
     }
 
+    console.error("revalidated successfully");
+
     return NextResponse.json({
       status: 200,
       revalidated: true,
