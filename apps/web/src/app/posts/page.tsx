@@ -132,9 +132,7 @@ export default function IndexPage() {
                       {new Date(post.publishedAt).toISOString().slice(0, 10)}
                     </Badge>
                   )}
-                  {post?.tag ? (
-                    <Badge className="">Tag: {post.tag}</Badge>
-                  ) : null}
+                  {post?.tag ? <Badge className="">{post.tag}</Badge> : null}
                 </div>
               </Card>
             </Link>
