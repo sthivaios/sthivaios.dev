@@ -28,7 +28,8 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    console.error("revalidated successfully");
+    // eslint-disable-next-line no-console
+    console.info("revalidated successfully");
 
     return NextResponse.json({
       status: 200,
