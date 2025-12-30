@@ -1,9 +1,6 @@
 import { defineQuery, PortableText } from "next-sanity";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import Image from "next/image";
-import { sanityImageUrl } from "@/sanity/image";
-
 import { sanityFetch } from "@/sanity/live";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import SharePostButton from "@/components/share-post-button";
