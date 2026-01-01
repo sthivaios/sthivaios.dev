@@ -4,27 +4,24 @@ import React from "react";
 import { Card } from "@/components/ui/card";
 import { Thermometer, Droplets } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
-import { tryCatch } from "@/lib/try-catch";
 import { fetchWeatherWorkerData } from "@/app/weather/actions";
+import { Spinner } from "@/components/ui/spinner";
 
 function DataDisplay() {
   const query = useQuery({
     queryKey: ["weatherworker_data"],
     queryFn: async () => {
-      const { data, error } = await tryCatch(fetchWeatherWorkerData());
+      const result = await fetchWeatherWorkerData();
 
-      if (error) throw error;
-      return data;
+      if (!result.success) {
+        throw new Error(result.error);
+      }
+
+      return result.data;
     },
+    staleTime: 30000,
+    refetchInterval: 60000,
   });
-
-  if (query.isLoading) {
-    return (
-      <Card className="w-max flex flex-row items-center justify-center gap-10 p-15">
-        Loading...
-      </Card>
-    );
-  }
 
   if (query.error) {
     return (
@@ -38,26 +35,36 @@ function DataDisplay() {
 
   return (
     <Card className="w-max flex flex-row items-center justify-center gap-10 p-15">
-      <Card className="flex flex-col items-center justify-center gap-4 w-max p-10 hover:bg-muted transition duration-300">
-        <Thermometer size="56" />
-        <h2 className="text-2xl font-bold">Temperature</h2>
-        <p className="text-4xl font-extrabold">67ºC</p>
-        <p className="italic text-sm text-center">
-          Last update:
-          <br />
-          {new Date().toLocaleString()}
-        </p>
-      </Card>
-      <Card className="flex flex-col items-center justify-center gap-4 w-max p-10 hover:bg-muted transition duration-300">
-        <Droplets size="56" />
-        <h2 className="text-2xl font-bold">Humidity</h2>
-        <p className="text-4xl font-extrabold">67%</p>
-        <p className="italic text-sm text-center">
-          Last update:
-          <br />
-          {new Date().toLocaleString()}
-        </p>
-      </Card>
+      {query.isLoading ? (
+        <div className="fixed flex flex-row items-center z-50 gap-5">
+          <Spinner className="size-10"></Spinner>
+          <p className="text-xl">Loading...</p>
+        </div>
+      ) : null}
+      <div
+        className={`flex flex-row gap-10 ${query.isLoading ? "blur-2xl" : ""} transition-all duration-500`}
+      >
+        <Card className="flex flex-col items-center justify-center gap-4 w-max p-10 hover:bg-muted transition duration-300">
+          <Thermometer size="56" />
+          <h2 className="text-2xl font-bold">Temperature</h2>
+          <p className="text-4xl font-extrabold">67ºC</p>
+          <p className="italic text-sm text-center">
+            Last update:
+            <br />
+            {new Date().toLocaleString()}
+          </p>
+        </Card>
+        <Card className="flex flex-col items-center justify-center gap-4 w-max p-10 hover:bg-muted transition duration-300">
+          <Droplets size="56" />
+          <h2 className="text-2xl font-bold">Humidity</h2>
+          <p className="text-4xl font-extrabold">67%</p>
+          <p className="italic text-sm text-center">
+            Last update:
+            <br />
+            {new Date().toLocaleString()}
+          </p>
+        </Card>
+      </div>
     </Card>
   );
 }
