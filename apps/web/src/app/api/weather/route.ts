@@ -13,7 +13,10 @@ export async function GET() {
     );
 
     return NextResponse.json(data, { status: 200 });
-  } catch {
+  } catch (error) {
+    //eslint-disable-next-line no-console
+    console.error(error);
+
     return NextResponse.json(
       { error: "Failed to fetch weather data" },
       { status: 500 },
