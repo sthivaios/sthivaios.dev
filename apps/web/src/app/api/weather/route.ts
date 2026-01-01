@@ -3,11 +3,14 @@ import axios from "axios";
 
 export async function GET() {
   try {
-    const { data } = await axios.get("https://weatherworker.sthivaios.dev", {
-      headers: {
-        Authorization: process.env.WEATHERWORKER_API_KEY!,
+    const { data } = await axios.get(
+      `https://weatherworker.sthivaios.dev?timestamp=${new Date().getTime()}`,
+      {
+        headers: {
+          Authorization: process.env.WEATHERWORKER_API_KEY!,
+        },
       },
-    });
+    );
 
     return NextResponse.json(data, { status: 200 });
   } catch {
