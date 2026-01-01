@@ -47,21 +47,27 @@ function DataDisplay() {
         <Card className="flex flex-col items-center justify-center gap-4 w-max p-10 hover:bg-muted transition duration-300">
           <Thermometer size="56" />
           <h2 className="text-2xl font-bold">Temperature</h2>
-          <p className="text-4xl font-extrabold">67ºC</p>
+          <p className="text-4xl font-extrabold">
+            {query.data?.ds18b20?.value.toFixed(1)}ºC
+          </p>
           <p className="italic text-sm text-center">
             Last update:
             <br />
-            {new Date().toLocaleString()}
+            {query.data?.ds18b20?.timestamp
+              ? new Date(Number(query.data.ds18b20.timestamp)).toLocaleString()
+              : "Unavailable"}
           </p>
         </Card>
         <Card className="flex flex-col items-center justify-center gap-4 w-max p-10 hover:bg-muted transition duration-300">
           <Droplets size="56" />
           <h2 className="text-2xl font-bold">Humidity</h2>
-          <p className="text-4xl font-extrabold">67%</p>
+          <p className="text-4xl font-extrabold">{query.data?.dht11?.value}%</p>
           <p className="italic text-sm text-center">
             Last update:
             <br />
-            {new Date().toLocaleString()}
+            {query.data?.dht11?.timestamp
+              ? new Date(Number(query.data.dht11.timestamp)).toLocaleString()
+              : "Unavailable"}
           </p>
         </Card>
       </div>
