@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { JetBrains_Mono } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 import { SanityLive } from "@/sanity/live";
 import { ThemeProvider } from "@/components/theme-provider";
@@ -9,7 +9,7 @@ import { Analytics } from "@vercel/analytics/next";
 import Banner from "@/components/banner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 
-const jetbrainsMono = JetBrains_Mono({
+const inter = Inter({
   variable: "--font-sans",
   subsets: ["latin"],
 });
@@ -33,8 +33,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={jetbrainsMono.variable}>
-      <body className={`${jetbrainsMono.variable} antialiased`}>
+    <html lang="en" className={inter.variable}>
+      <body className={`${inter.variable} antialiased`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
@@ -52,7 +52,7 @@ export default function RootLayout({
               <div className="p-0 flex-1">{children}</div>
               <div className="p-10 flex flex-row items-center justify-center w-full">
                 <p className="rainbow transition-all duration-200">
-                  Stratos Thivaios © 2025
+                  Stratos Thivaios © 2026
                 </p>
               </div>
             </div>

@@ -165,7 +165,7 @@
 }
 
 .the_good_prose_stuff {
-  @apply flex flex-col justify-center w-full px-4 sm:px-8 md:px-12 lg:px-20 xl:px-36 prose-p:text-justify prose-sm sm:prose-lg md:prose-lg lg:prose-xl prose-p:mb-2 prose-a:underline dark:prose-invert prose-h1:mt-10 prose-headings:font-bold;
+  @apply flex flex-col justify-center w-full px-4 sm:px-8 md:px-12 lg:px-20 xl:px-36 prose-p:text-justify prose-sm sm:prose-lg md:prose-lg lg:prose-xl prose-p:mb-2 prose-a:underline dark:prose-invert prose-h1:mt-10 prose-headings:font-bold prose-h1:text-3xl prose-h2:text-2xl;
 }
 
 .hyperlink {
