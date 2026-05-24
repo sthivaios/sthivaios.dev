@@ -168,6 +168,23 @@
   @apply flex flex-col justify-center w-full px-4 sm:px-8 md:px-12 lg:px-20 xl:px-36 prose-p:text-justify prose-sm sm:prose-lg md:prose-lg lg:prose-xl prose-p:mb-2 prose-a:underline dark:prose-invert prose-h1:mt-10 prose-headings:font-bold prose-h1:text-3xl prose-h2:text-2xl;
 }
 
+/* stupid ass margins */
+
+.the_good_prose_stuff h1 {
+  margin-top: 0rem !important;
+  margin-bottom: 0rem !important;
+}
+
+.the_good_prose_stuff h2 {
+  margin-top: 1rem !important;
+  margin-bottom: 0.5rem !important;
+}
+
+.the_good_prose_stuff h3 {
+  margin-top: 1rem !important;
+  margin-bottom: 0.25rem !important;
+}
+
 .hyperlink {
   @apply text-primary hover:text-blue-300 transition duration-200 ease-in-out;
 }

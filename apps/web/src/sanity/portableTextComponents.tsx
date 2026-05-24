@@ -8,6 +8,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import ClickableImage from "@/components/clickableImage";
+import {Separator} from "@/components/ui/separator";
 
 export const components: PortableTextComponents = {
   types: {
@@ -34,6 +35,7 @@ export const components: PortableTextComponents = {
           </div>
         </div>
       ) : null,
+    divider: () => <Separator className="my-4" />,
   },
   marks: {
     link: ({ value, children }) => {

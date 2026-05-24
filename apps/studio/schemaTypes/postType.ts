@@ -114,6 +114,23 @@ export default {
             },
           ],
         },
+        {
+          name: 'divider',
+          title: 'Divider',
+          type: 'object',
+          fields: [
+            {
+              name: 'style',
+              type: 'string',
+              initialValue: 'line',
+            },
+          ],
+          preview: {
+            prepare() {
+              return {title: '─────────────────'}
+            },
+          },
+        },
       ],
     },
   ],

@@ -12,6 +12,8 @@
  * ---------------------------------------------------------------------------------
  */
 
+export declare const internalGroqTypeReferenceTo: unique symbol;
+
 // Source: schema.json
 export type SanityImageAssetReference = {
   _ref: string;
@@ -67,6 +69,11 @@ export type Post = {
         caption?: string;
         alt?: string;
         _type: "inlineImage";
+        _key: string;
+      }
+    | {
+        style?: string;
+        _type: "divider";
         _key: string;
       }
   >;
@@ -127,6 +134,7 @@ export type SanityImageMetadata = {
   palette?: SanityImagePalette;
   lqip?: string;
   blurHash?: string;
+  thumbHash?: string;
   hasAlpha?: boolean;
   isOpaque?: boolean;
 };
@@ -205,8 +213,6 @@ export type AllSanitySchemaTypes =
   | SanityImageAsset
   | Geopoint;
 
-export declare const internalGroqTypeReferenceTo: unique symbol;
-
 // Source: ../web/src/app/page.tsx
 // Variable: ABOUTME_QUERY
 // Query: *[    _type == "post" &&    slug.current == "about-me"  ][0]
@@ -244,6 +250,11 @@ export type ABOUTME_QUERY_RESULT = {
         }>;
         level?: number;
         _type: "block";
+        _key: string;
+      }
+    | {
+        style?: string;
+        _type: "divider";
         _key: string;
       }
     | {
@@ -299,6 +310,11 @@ export type POST_QUERY_RESULT = {
         }>;
         level?: number;
         _type: "block";
+        _key: string;
+      }
+    | {
+        style?: string;
+        _type: "divider";
         _key: string;
       }
     | {
